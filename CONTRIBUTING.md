@@ -2,6 +2,8 @@
 
 Thank you for your interest in contributing to WorkoutTracker! This document provides guidelines and information for developers.
 
+> ⚠️ **Licensing Notice:** This project is released with all rights reserved. Please reach out via GitHub issues before reusing code outside the repository or distributing builds.
+
 ## Getting Started
 
 ### Development Environment Setup
@@ -14,8 +16,8 @@ Thank you for your interest in contributing to WorkoutTracker! This document pro
 
 2. **Clone the Repository**
    ```bash
-   git clone https://github.com/Unclip1843/ios-worktout-tracker.git
-   cd ios-worktout-tracker
+   git clone https://github.com/Unclip1843/ios-workout-tracker.git
+   cd ios-workout-tracker
    ```
 
 3. **Open in Xcode**

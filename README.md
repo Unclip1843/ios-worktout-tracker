@@ -6,11 +6,10 @@
 ![Swift](https://img.shields.io/badge/Swift-5.9+-orange.svg)
 ![SwiftUI](https://img.shields.io/badge/SwiftUI-Latest-green.svg)
 ![SwiftData](https://img.shields.io/badge/SwiftData-Enabled-purple.svg)
-![License](https://img.shields.io/badge/License-MIT-yellow.svg)
 
 **A comprehensive fitness tracking app built with SwiftUI and SwiftData**
 
-[Features](#-features) • [Installation](#-installation) • [Usage](#-usage) • [Architecture](#-architecture) • [Contributing](#-contributing)
+[Screenshots](#-screenshots) • [Features](#-features) • [Installation](#-installation) • [Usage](#-usage) • [Architecture](#-architecture) • [FAQ](#-faq) • [Contributing](#-contributing)
 
 </div>
 
@@ -18,7 +17,8 @@
 
 ## 📱 Overview
 
-WorkoutTracker is a modern, privacy-first iOS fitness application that helps you track workouts, set goals, analyze progress, and maintain a fitness journal—all without leaving your device.
+WorkoutTracker is a modern, privacy-first iOS fitness application that helps you track workouts, set goals, analyze progress, and maintain a fitness journal—all without leaving your device.  
+⚠️ **Usage Notice:** All rights reserved. Please contact us (via GitHub issues) before using the code outside this repository.
 
 ### ✨ What Makes It Special
 
@@ -28,6 +28,40 @@ WorkoutTracker is a modern, privacy-first iOS fitness application that helps you
 - 💾 **SwiftData Powered** - Modern, efficient data persistence
 - 🎨 **Native SwiftUI** - Smooth, native iOS experience
 - 🌍 **Unit Flexibility** - Support for both metric and imperial units
+
+---
+
+## 📸 Screenshots
+
+<div align="center">
+
+### Coming Soon!
+
+Screenshots of the app in action will be added here. The app features:
+
+- 🏋️ **Track Tab** - Log workouts with ease
+- 🏆 **PRs Tab** - View your personal records
+- 🎯 **Goals Tab** - Track progress toward your fitness goals
+- 📊 **Analyze Tab** - Visualize your progress with interactive charts
+- 📖 **Journal Tab** - Document your fitness journey with photos
+
+**Want to contribute screenshots?** See [docs/SCREENSHOTS.md](docs/SCREENSHOTS.md) for the complete guide on capturing and adding app screenshots.
+
+### Demo Features
+
+| Feature | Description |
+|---------|-------------|
+| **Custom Tab Bar** | All 5 tabs always visible - no "More" overflow |
+| **Swipe Navigation** | Swipe left/right to navigate between days |
+| **PR Detection** | Automatic personal record notifications |
+| **Smart Goals** | Flexible cadences with auto-calculated progress |
+| **Rich Charts** | Interactive Swift Charts with multiple time ranges |
+
+**📱 See the app in action:**
+- [User Flow Diagrams](docs/USER_FLOWS.md) - Complete journey maps
+- [Architecture Diagrams](ARCHITECTURE.md) - System design visualizations
+
+</div>
 
 ---
 
@@ -222,8 +256,8 @@ WorkoutTracker/
 
 ```bash
 # 1. Clone the repository
-git clone https://github.com/Unclip1843/ios-worktout-tracker.git
-cd ios-worktout-tracker
+git clone https://github.com/Unclip1843/ios-workout-tracker.git
+cd ios-workout-tracker
 
 # 2. Open in Xcode
 open WorkoutTracker.xcodeproj
@@ -410,6 +444,168 @@ Personal records are detected and updated automatically:
 
 ---
 
+## ❓ FAQ
+
+<details>
+<summary><strong>How do I add my first workout?</strong></summary>
+
+1. Open the **Track** tab
+2. Tap the **+** button
+3. Choose **Strength**, **Cardio**, or **Custom**
+4. Fill in the details and tap **Save**
+
+Your workout is now logged! See [User Flows](docs/USER_FLOWS.md#track-workout-flow) for detailed steps.
+
+</details>
+
+<details>
+<summary><strong>Why use a custom tab bar instead of native TabView?</strong></summary>
+
+iOS's native `TabView` only supports 5 tabs before adding a "More" menu. WorkoutTracker implements a custom tab bar to ensure all 5 tabs (Track, PRs, Goals, Analyze, Journal) remain always visible without overflow.
+
+See [Architecture: Custom Tab Bar](ARCHITECTURE.md#custom-tab-bar-deep-dive) for implementation details.
+
+</details>
+
+<details>
+<summary><strong>How are goals calculated?</strong></summary>
+
+Goals calculate progress based on their cadence:
+
+- **One-time**: Cumulative sum since goal creation
+- **Daily**: Today's total only
+- **Weekly**: Current week (Monday-Sunday)
+- **Monthly**: Current month
+- **Yearly**: Current year
+
+See [Architecture: GoalProgressService](ARCHITECTURE.md#goalprogressservice) for the algorithm.
+
+</details>
+
+<details>
+<summary><strong>Where are my photos stored?</strong></summary>
+
+Journal photos are stored in the app's **Documents directory** (`/Documents/images/`) with compression:
+- Format: JPEG
+- Quality: 0.8
+- Max dimension: 1024px
+
+Photos are **not** stored in your Photos library, ensuring privacy. They're removed when you delete the app.
+
+</details>
+
+<details>
+<summary><strong>Can I sync my data across devices?</strong></summary>
+
+Not yet! WorkoutTracker v1.0 is **local-only** for maximum privacy. Cloud sync via CloudKit is planned for v2.0 (Q3 2025).
+
+See [CHANGELOG](CHANGELOG.md#upcoming-releases) for the roadmap.
+
+</details>
+
+<details>
+<summary><strong>How do I export my data?</strong></summary>
+
+Data export is coming in v1.1! Planned formats:
+- JSON (full data backup)
+- CSV (analysis-friendly)
+- PDF (printable reports)
+
+See [CHANGELOG](CHANGELOG.md#upcoming-releases) for release timeline.
+
+</details>
+
+<details>
+<summary><strong>Why are all weights stored in kilograms internally?</strong></summary>
+
+Storing data in a single unit (metric) ensures:
+- **Consistency** across unit changes
+- **Accurate calculations** without conversion errors
+- **Easy data migration** if you switch preferences
+
+The app converts to pounds automatically when displaying if you've set that preference in Settings.
+
+</details>
+
+<details>
+<summary><strong>What happens if I delete an exercise that has logged sets?</strong></summary>
+
+Currently, deleting an exercise with logged sets will orphan those sets (they remain in the database but won't display). A safety confirmation will be added in v1.1.
+
+**Workaround**: Rename the exercise instead of deleting it.
+
+</details>
+
+<details>
+<summary><strong>Can I use this app offline?</strong></summary>
+
+Yes! WorkoutTracker is **100% offline**. No internet connection required. All data is stored locally on your device using SwiftData.
+
+</details>
+
+<details>
+<summary><strong>Is my data private?</strong></summary>
+
+Absolutely! WorkoutTracker:
+- ✅ Stores all data locally (no cloud)
+- ✅ Makes zero network requests
+- ✅ Includes no analytics or tracking
+- ✅ Uses no third-party SDKs
+- ✅ Encrypts data at rest (iOS default encryption)
+
+See [Architecture: Security & Privacy](ARCHITECTURE.md#security--privacy) for details.
+
+</details>
+
+<details>
+<summary><strong>How do I report a bug or request a feature?</strong></summary>
+
+Open an issue on GitHub:
+- 🐛 [Report a Bug](https://github.com/Unclip1843/ios-worktout-tracker/issues)
+- 💡 [Request a Feature](https://github.com/Unclip1843/ios-worktout-tracker/issues)
+
+Include:
+- iOS version
+- Device model
+- Steps to reproduce (for bugs)
+- Screenshots if applicable
+
+</details>
+
+<details>
+<summary><strong>Will there be an Apple Watch app?</strong></summary>
+
+Yes! An Apple Watch companion app is planned for v2.0 (Q3 2025) with:
+- Quick workout logging
+- Heart rate integration
+- Voice input for notes
+- Complications
+
+See [CHANGELOG](CHANGELOG.md#upcoming-releases) for the full roadmap.
+
+</details>
+
+<details>
+<summary><strong>Can I contribute to this project?</strong></summary>
+
+Please reach out via GitHub issues before making contributions, as this project has specific licensing terms. See [CONTRIBUTING.md](CONTRIBUTING.md) for the full policy and technical guidelines.
+
+</details>
+
+<details>
+<summary><strong>What iOS version do I need?</strong></summary>
+
+**iOS 17.0 or later** is required because:
+- SwiftData (iOS 17+)
+- Swift Charts (iOS 16+, enhanced in 17)
+- Latest SwiftUI features
+
+The app is built with Xcode 15+ and Swift 5.9+.
+
+</details>
+
+---
+
 ## 🤝 Contributing
 
 We welcome contributions! See our [CONTRIBUTING.md](CONTRIBUTING.md) for:
@@ -437,7 +633,7 @@ git push origin feature/amazing-feature
 
 ## 📜 License
 
-This project is available for personal and educational use.
+All rights reserved. Please open a GitHub issue to discuss licensing or other usage requests.
 
 ---
 
@@ -452,8 +648,9 @@ Built with ❤️ using:
 
 ## 📞 Support & Feedback
 
-- 🐛 [Report a Bug](https://github.com/Unclip1843/ios-worktout-tracker/issues)
-- 💡 [Request a Feature](https://github.com/Unclip1843/ios-worktout-tracker/issues)
+- 🐛 [Report a Bug](https://github.com/Unclip1843/ios-workout-tracker/issues)
+- 💡 [Request a Feature](https://github.com/Unclip1843/ios-workout-tracker/issues)
+- 📬 [Request Usage Permission](https://github.com/Unclip1843/ios-workout-tracker/issues/new?labels=licensing&title=License%20Request)
 - 📖 [Read the Docs](ARCHITECTURE.md)
 
 ---
